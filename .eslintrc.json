@@ -1,0 +1,48 @@
+{
+    "root": true,
+    "parser": "babel-eslint",
+    "env": {
+        "browser": true,
+        "es6": true
+    },
+    "extends": ["airbnb-base"],
+    "parserOptions": {
+        "sourceType": "module"
+    },
+    "plugins": ["html", "import"],
+    "settings": {
+        "import/resolver": "webpack"
+    },
+    "rules": {
+        "indent": [
+            "error",
+            4
+        ],
+        "quotes": [
+            "error",
+            "single"
+        ],
+        "semi": [
+            "error",
+            "never"
+        ],
+        "no-console": "off",
+        "no-tabs": "off",
+        "no-new": "off",
+        "no-shadow": "off",
+        "global-require": "off",
+        "max-len": [
+            "error",
+            150
+        ],
+        "no-param-reassign": [
+            "error",
+            {
+                "props": false
+            }
+        ],
+        "import/extensions": 0,
+        "import/no-unresolved": 0
+        // "import/no-extraneous-dependencies": "off"
+    }
+}

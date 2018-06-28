@@ -1,0 +1,678 @@
+<!DOCTYPE html>
+<html lang="zh-cmn-Hans">
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+        <!-- 网站描述 -->
+        <meta name="description" content="A Vue.js@latest project"/>
+        <!-- 网站关键词 -->
+        <meta name="keywords" content=""/>
+        <!-- 作者 -->
+        <meta name="author" content="Hxf1996 <940781678@qq.com>, Huxfjxj@gmail.com"/>
+        <!-- 搜索引擎抓取 -->
+        <meta name="robots" content="index"/>
+        <!-- 为移动设备添加 viewport -->
+        <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+        <!-- 禁止百度转码 -->
+        <meta http-equiv="Cache-Control" content="no-siteapp" />
+
+        <!-- android标签颜色 -->
+        <meta name="theme-color" content="#4DBA87">
+
+        <!-- IOS设备配置开始 -->
+
+        <!-- 主屏标题 -->
+        <meta name="apple-mobile-web-app-title" content="vue-ssr">
+        <!-- 启用WEBAPP全屏模式 -->
+        <meta name="apple-mobile-web-app-capable" content="yes">
+        <!-- 设置工具栏为半透明 -->
+        <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+        <!-- 禁止识别手机号码和邮箱 -->
+        <meta name="format-detection" content="telephone=no, email=no" />
+        <!-- IOS图标 -->
+        <link rel="apple-touch-icon" href="/img/icons/apple-touch-icon-152x152.png">
+        <!-- 待补IOS启动配置 -->
+
+        <!-- IOS设备配置结束 -->
+
+        <!-- Windows磁铁颜色 -->
+        <meta name="msapplication-TileColor" content="#4DBA87">
+        <!-- Windows磁铁图标 -->
+        <meta name="msapplication-TileImage" content="/img/icons/msapplication-icon-144x144.png">
+
+        <!-- 老式手持设备优化 -->
+        <meta name="HandheldFriendly" content="true">
+        <!-- 强制360使用webkit内核 -->
+        <meta name="renderer" content="webkit">
+        <!-- UC应用模式 -->
+        <meta name="browsermode" content="application">
+        <!-- QQ应用模式 -->
+        <meta name="x5-page-mode" content="app">
+
+        <!-- 设置网站ICON -->
+        <link rel="icon" type="image/png" sizes="32x32" href="/img/icons/favicon-32x32.png">
+        <link rel="icon" type="image/png" sizes="16x16" href="/img/icons/favicon-16x16.png">
+        <!--[if IE]><link rel="shortcut icon" href="/static/img/icons/favicon.ico"><![endif]-->
+
+        <!-- anroid WEBAPP设置 -->
+        <link rel="manifest" href="/manifest.json">
+        <title>crm</title>
+
+        <style>
+            body,
+            h1,
+            h2,
+            h3,
+            h4,
+            h5,
+            h6,
+            hr,
+            p,
+            blockquote,
+            dl,
+            dt,
+            dd,
+            ul,
+            ol,
+            li,
+            pre,
+            form,
+            fieldset,
+            legend,
+            button,
+            input,
+            textarea,
+            th,
+            td {
+                margin: 0;
+                padding: 0;
+            }
+
+            body,
+            button,
+            input,
+            select,
+            textarea {
+                font: 12px/1.5 tahoma, arial, 'Microsoft YaHei','Hiragino Sans GB', '\5b8b\4f53', sans-serif;
+            }
+
+            h1,
+            h2,
+            h3,
+            h4,
+            h5,
+            h6 {
+                font-size: 100%;
+            }
+
+            small {
+                font-size: 12px;
+            }
+
+            ul,
+            ol {
+                list-style: none;
+            }
+
+            a {
+                text-decoration: none;
+            }
+
+            a:hover {
+                text-decoration: none;
+            }
+
+            fieldset,
+            img {
+                border: 0;
+            }
+
+            button,
+            input,
+            select,
+            textarea {
+                font-size: 100%;
+                outline:none;
+            }
+
+            table {
+                border-collapse: collapse;
+                border-spacing: 0;
+            }
+
+            .clearfix {
+                *zoom: 1; /* for IE 6/7 */
+                clear: both;
+            }
+
+            body {
+                font-family: "Microsoft YaHei", "宋体", Helvetica Neue, Arial, SimSun, sans-serif;
+            }
+
+            input:focus [placeholder] {
+                color: #999;
+            }
+            /****************************** toast common **********************************/
+            .toast {
+                width: 160px;
+                height: auto;
+                padding-bottom: 15px;
+                position: fixed;
+                left: 45%;
+                top: 45%;
+                transform: translateX(-45%,-45%);
+                border-radius: 5px;
+                box-shadow: 0 1px 3px rgba(0, 0, 0, .3);
+                background-color: rgba(0, 0, 0, 0.7);
+                z-index: 100000;
+                text-align: center;
+            }
+            .toast-icon {
+                width: 60px;
+                height: 60px;
+                display: block;
+                margin: 30px auto 10px;
+            }
+            .toast-icon-ok {
+                background-image: url("data:image/png;base64,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");
+            }
+            .toast-icon-false {
+                background-image: url("data:image/png;base64,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");
+            }
+            .toast-icon-notice {
+                background-image: url("data:image/png;base64,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");
+            }
+            .toast-text {
+                font-size: 14px;
+                color: #fff;
+            }
+            /*头文件*/
+            .m-header{
+                position: fixed;
+                z-index: 10;
+                width: 100%;
+                height: 60px;
+                line-height: 60px;
+                background-color: #324157;
+            }
+            .m-header .logo{
+                width: 80px;
+                float: left;
+                text-align: center;
+                color: #fff;
+                font-size: 20px;
+                margin-left: 37px;
+            }
+            .m-header .user{
+                float: right;
+                margin-right: 40px;
+            }
+            .m-header .user .user-info{
+                overflow:hidden;
+            }
+            .m-header .user .user-name{
+                cursor: pointer;
+                color: #fff;
+                font-size: 14px;
+                float:right;
+            }
+            .m-header .user .user-photo{
+                margin: 10px 0 10px 10px;
+                float: right;
+                width: 35px;
+                height: 35px;
+                border-radius: 50%;
+                border: 3px solid #fff;
+                cursor: pointer;
+            }
+            .m-header .user .operate{
+                display:none;
+                clear:both;
+                padding:10px 20px;
+                line-height:1.5;
+                border: 1px solid #d1dbe5;
+                margin-top:-2px;
+                font-size:16px;
+                cursor:pointer;
+                box-shadow: 0 2px 4px rgba(0,0,0,.12), 0 0 6px rgba(0,0,0,.12);
+            }
+            .m-header .user:hover .operate{
+                display:block
+            }
+            /*左侧边栏*/
+            .m-slider{
+                position:fixed;
+                top:60px;
+                width:180px;
+                bottom:0;
+                background-color: #324157;
+                border-top: 1px solid #333;
+            }
+            .m-slider .slider-list{
+                padding:20px;
+            }
+            .m-slider .slider-list .first-item .menu-list{
+                display:none;
+            }
+            .m-slider .slider-list .first-item.active  .menu-list{
+                display:block;
+            }
+            .m-slider .slider-list .first-item.active .menu-title{
+                color:#9bd1f1;
+            }
+            .m-slider .slider-list .menu-title{
+                font-weight: 100;
+                font-size: 16px;
+                color:#fff;
+                margin-bottom: 1px;
+                padding: 3px;
+                cursor:pointer;
+            }
+            .m-slider .menu-list{
+                padding-left:10px;
+                margin-bottom:10px;
+            }
+            .m-slider .menu-list .second-item{
+                display:block;
+                color:#fff;
+                font-size:13px;
+                line-height:1.5;
+                padding:3px;
+                margin:3px 0;
+                cursor:pointer;
+            }
+            .m-slider .menu-list .second-item:hover,.m-slider .menu-list .active .second-item{
+                color:#9bd1f1;
+            }
+            .content-wrapper{
+                margin-left: 180px;
+                padding-top: 60px;
+            }
+
+        </style>
+    </head>
+    <body>
+        <header class="m-header">
+        <div class="logo">CRM</div>
+        <div class="user">
+            <div class="clearfix user-info">
+                <img src="./src/assets/user-logg.jpg" class="user-photo" />
+                <span class="user-name">hello</span>
+            </div>
+            <div class="operate">
+                <div>退出登录</div>
+            </div>
+        </div>
+    </header>
+        <div class="m-slider">
+        <ul class="slider-list">
+            <li class="first-item active">
+                <p class="menu-title">营销管理</p>
+                <ul class="menu-list">
+                    <li class="active"><a href="../market/ideaList.html" class="second-item">创意管理</a></li>
+                    <li><a href="../market/activityList.html" class="second-item">活动管理</a></li>
+                </ul>
+            </li>
+            <li class="first-item">
+                <p class="menu-title">设备管理</p>
+                <ul class="menu-list">
+                    <li><a href="../device/list.html" class="second-item">设备管理</a></li>
+                    <li><a href="../device/model.html" class="second-item">设备型号管理</a></li>
+                    <li><a href="../device/type.html" class="second-item">设备类型管理</a></li>
+                    <li><a href="../device/group.html" class="second-item">设备分组管理</a></li>
+                </ul>
+            </li>
+        </ul>
+    </div>
+        <div class="content-wrapper">
+            <div id="app">
+                <div class="spinner8">
+                    <div class="spinner-container container1">
+                        <div class="circle1">&nbsp;</div>
+                        <div class="circle2">&nbsp;</div>
+                        <div class="circle3">&nbsp;</div>
+                        <div class="circle4">&nbsp;</div>
+                    </div>
+                    <div class="spinner-container container2">
+                        <div class="circle1">&nbsp;</div>
+                        <div class="circle2">&nbsp;</div>
+                        <div class="circle3">&nbsp;</div>
+                        <div class="circle4">&nbsp;</div>
+                    </div>
+                    <div class="spinner-container container3">
+                        <div class="circle1">&nbsp;</div>
+                        <div class="circle2">&nbsp;</div>
+                        <div class="circle3">&nbsp;</div>
+                        <div class="circle4">&nbsp;</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <script src="http://cdn.elephtribe.com/lib/ajax/0.0.1/build/ajax.js"></script>
+        <script>
+            var common={
+                //过滤非标准字符，以空格链接
+                // 数组合并
+                merge: function(first, second) {
+                    var len = +second.length,
+                        j = 0,
+                        i = first.length;
+
+                    for (; j < len; j++) {
+                        first[i++] = second[j];
+                    }
+
+                    first.length = i;
+
+                    return first;
+                },
+                stripAndCollapse:function (value) {
+                    var rnothtmlwhite = (/[^\x20\t\r\n\f]+/g);
+                    var tokens =value && value.match(rnothtmlwhite) || [];
+                    return tokens.join(" ");
+                },
+                siblingsFn: function( n, elem ) {
+                    var matched = [];
+
+                    for ( ; n; n = n.nextSibling ) {
+                        if ( n.nodeType === 1 && n !== elem ) {
+                            matched.push( n );
+                        }
+                    }
+
+                    return matched;
+                },
+                // 获取所有的兄弟节点
+                siblings: function( elem ) {
+                    return this.siblingsFn( ( elem.parentNode || {} ).firstChild, elem );
+                },
+                children: function( elem ) {
+                    return this.siblingsFn( elem.firstChild );
+                },
+                getClass:function(elem){
+                    return elem.getAttribute && elem.getAttribute( "class" ) || "";
+                },
+                hasClass: function(dom,selector) {
+                    var className, elem,
+                        i = 0;
+                    var classOld=dom.getAttribute && dom.getAttribute("class")
+                    className = " " + selector + " ";
+                    if (dom.nodeType === 1 &&
+                        (" " + this.stripAndCollapse(classOld) + " ").indexOf(className) > -1) {
+                        return true;
+                    }
+                    return false;
+                },
+                //给元素添加类，支持当个元素添加，和多元素添加，不支持函数操作
+                addClass: function(doms, value ) {
+                    if(!doms) return;
+                    if(!doms.length){
+                        doms=[doms]
+                    }
+                    var doms=this.merge([],doms);
+                    var rnothtmlwhite = (/[^\x20\t\r\n\f]+/g);
+                    var classes, elem, cur, curValue, clazz, j, finalValue,
+                        i = 0,that=this;
+
+                    if ( typeof value === "string" && value ) {
+                        classes = value.match( rnothtmlwhite ) || [];
+
+                        //               对当个dom节点进行处理
+
+                        while ( ( elem = doms[ i++ ] ) ) {
+                            curValue = that.getClass( elem );
+                            cur = elem.nodeType === 1 && ( " " + that.stripAndCollapse( curValue ) + " " );
+
+                            if ( cur ) {
+                                j = 0;
+                                while ( ( clazz = classes[ j++ ] ) ) {
+                                    if ( cur.indexOf( " " + clazz + " " ) < 0 ) {
+                                        cur += clazz + " ";
+                                    }
+                                }
+
+                                finalValue = that.stripAndCollapse( cur );
+                                if ( curValue !== finalValue ) {
+                                    elem.setAttribute( "class", finalValue );
+                                }
+                            }
+                        }
+                    }
+                },
+                //移除元素，，支持单个元素移除，和多元素移除，不支持函数操作
+                removeClass: function(doms, value ) {
+                    if(!doms) return;
+
+                    if(!doms.length){
+                        doms=[doms]
+                    }
+                    var doms=this.merge([],doms);
+                    var rnothtmlwhite = (/[^\x20\t\r\n\f]+/g);
+                    var classes, elem, cur, curValue, clazz, j, finalValue,
+                        i = 0,that=this;
+                    while ( ( elem = doms[ i++ ] ) ) {
+                        if ( typeof value === "string" && value ){
+                            classes = value.match(rnothtmlwhite) || [];
+
+                            curValue = that.getClass(elem);
+                            cur = elem.nodeType === 1 && ( " " + that.stripAndCollapse(curValue) + " " );
+
+                            if(cur){
+                                j = 0;
+                                while(( clazz = classes[j++] )){
+
+                                    // Remove *all* instances
+                                    while(cur.indexOf(" " + clazz + " ") > -1){
+                                        cur = cur.replace(" " + clazz + " ", " ");
+                                    }
+                                }
+
+
+                                finalValue = that.stripAndCollapse(cur);
+                                if(curValue !== finalValue){
+                                    elem.setAttribute("class", finalValue);
+                                }
+                            }
+                        }else if(arguments.length<=1){
+                            //传入空字符串时，将元素上的所有类都移除
+                            elem.setAttribute('class', '');
+                        }
+                    }
+                },
+                // 类的切换，支持操作单个元素和多元素
+                toggleClass: function( doms,value, stateVal ) {
+                    var rnothtmlwhite = (/[^\x20\t\r\n\f]+/g);
+                    if(!doms){
+                        return;
+                    } else{
+                        doms=[doms]
+                    }
+                    var doms=this.merge([],doms);
+                    var type = typeof value,i=0,that=this;
+
+                    if ( typeof stateVal === "boolean" && type === "string" ) {
+                        return stateVal ? this.addClass(doms ,value ) : this.removeClass(doms, value );
+                    }
+
+                    while ( ( elem = doms[ i++ ] ) ) {
+
+                        var className, i, self, classNames;
+                        j = 0;
+
+                        classNames = value.match( rnothtmlwhite ) || [];
+                        while ( ( className = classNames[ j++ ] ) ) {
+
+                            if ( that.hasClass(elem, className ) ) {
+                                that.removeClass(elem, className );
+                            } else {
+                                that.addClass(elem, className );
+                            }
+                        }
+                    }
+
+                },
+                //通过类名查父元素节点,
+                getParentsByClassName:function(elem,className){
+                    var that=this;
+
+                    while ( ( elem = elem.parentNode ) && elem.nodeType !== 9 ) {
+                        if ( elem.nodeType === 1 ) {
+                            if ( that.hasClass(elem,className) ) {
+                                return elem;
+                            }
+                        }
+                    }
+                    return null
+                },
+                //添加cookie
+                addCookie: function(name, value, options){
+                    if (arguments.length > 1 && name != null) {
+                        if (options == null) {
+                            options = {};
+                        }
+                        if (value == null) {
+                            options.expires = -1;
+                        }
+                        if (typeof options.expires == "number") {
+                            var time = options.expires;
+                            var expires = options.expires = new Date();
+                            expires.setTime(expires.getTime() + time * 1000);
+                        }
+                        if (options.path == null) {
+                            options.path = "/";
+                        }
+                        if (options.domain == null) {
+                            options.domain = "";
+                        }
+                        document.cookie = encodeURIComponent(String(name)) + "=" + encodeURIComponent(String(value)) + (options.expires != null ? "; expires=" + options.expires.toUTCString() : "") + ("; path=/") + ("; domain=" + options.domain) + (options.secure != null ? "; secure" : "");
+                    }
+                },
+                //获取指定的cookie
+                getCookie: function(name){
+                    if (name != null) {
+                        var value = new RegExp("(?:^|; )" + encodeURIComponent(String(name)) + "=([^;]*)").exec(document.cookie);
+                        return value ? decodeURIComponent(value[1]) : null;
+                    }
+                },
+                // 给左侧边栏添加事件
+                operateSilder:function( call ){
+                    var that=this;
+                    var doms=document.getElementsByClassName('slider-list')[0];
+                    doms.addEventListener('click',function(e){
+                        var target=e.target;
+                        if(that.hasClass(target,'menu-title')){
+                            var parentDom=target.parentNode;
+                            that.toggleClass(parentDom,'active');
+                            that.removeClass(that.siblings(parentDom),'active')
+                        }else if(that.hasClass(target,'second-item')){
+                            that.addClass(target.parentNode,'active');
+                            that.removeClass(that.siblings(target.parentNode),'active');
+                            var firstItemDoms=that.getParentsByClassName(target,'first-item');
+
+                            var siblingFirstItems=that.siblings(firstItemDoms);
+                            var siblingFirstDom;
+                            //移除兄弟节点中添加的active
+                            for(var i=0;i<siblingFirstItems.length;i++){
+                                siblingFirstDom=siblingFirstItems[i];
+                                var childerenDoms=that.children(siblingFirstDom)[1];
+                                that.removeClass(that.children(childerenDoms) ,'active');
+                            }
+                            call && call(target);
+                        }
+                    });
+                },
+                getOuterUrl: function (url) {
+                    // 本地环境
+                    if (!!~location.host.indexOf('dev.') || !!~location.host.indexOf('daily.')) {
+
+                        return 'http://daily.elephtribe.com' + url
+                    }
+                    //预发
+                    else if (!!~location.host.indexOf('gray.')) {
+                        return 'http://gray.elephtribe.com' + url
+                    }
+                    // 线上环境
+                    else {
+                        return 'http://www.elephtribe.com' + url
+                    }
+                },
+                //退出登录
+                loginout: function() {
+                    lib.ajax && lib.ajax({
+                        url: getOuterUrl('/member/logout.do'),
+                        type: 'get',
+                        dataType: 'json',
+                        contentType: 'application/json',
+                        xhrFields: {
+                            withCredentials: true,
+                        },
+                        data: {
+                            role: 'crm'
+                        },
+                        success: function (data) {
+                            if (data.status) {
+                                window.location.href = "../login.html"
+                            }
+                        }
+                    })
+                },
+                login: function() {
+                    var cookie=this.getCookie,getOuterUrl=this.getOuterUrl;
+//                    if (!Number.parseInt(cookie('_uk'))) {
+//                        window.location = '../login.html' + "?" + "redirect_Url=" + encodeURIComponent(location.href);
+//                        return;
+//                    }
+                    // lib.ajax && lib.ajax({
+                    //     url: getOuterUrl('/member/member/getUserByUserId.do'),
+                    //     type: 'get',
+                    //     dataType: 'json',
+                    //     contentType: 'application/json',
+                    //     xhrFields: {
+                    //         withCredentials: true,
+                    //     },
+                    //     data: {
+                    //         userId: Number.parseInt(cookie('_uk'), 10)
+                    //     },
+                    //     success: function (data) {
+                    //         if (data.status && data.responseCode == 0) {
+                    //             if (data.entry) {
+                    //                 var userName=document.getElementsByClassName('user-name')[0];
+                    //                 userName.innerHTML = data.entry.realName || data.entry.userNick || data.entry.mobile;
+                    //             }
+                    //         } else if (data.responseCode == 10212) {
+                    //             window.location = '../login.html' + "?" + "redirect_Url=" + encodeURIComponent(location.href);
+                    //         }
+                    //     }
+                    // })
+                },
+                //点击退出登录按钮相应退出登录事件
+                outLoginBtn:function(){
+                    var cookie=this.getCookie;
+                    var loginOutFn=this.loginout;
+
+                    var doms=document.getElementsByClassName('operate')[0];
+                    doms.addEventListener('click',function(e){
+                        var userCookie=Number.parseInt(cookie('_uk'), 10)
+                        e.preventDefault();
+                        if(!userCookie){
+                            return;
+                        }
+                        loginOutFn();
+                    });
+                },
+                init:function(){
+                    this.outLoginBtn();
+                    this.login();
+                }
+
+            }
+            window.onload = function () {
+                common.init();
+                // dom 为操作的子列表元素
+                common.operateSilder(function (dom) {
+                    console.log(dom);
+                });
+            };
+        </script>
+    </body>
+</html>
